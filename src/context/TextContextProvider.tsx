@@ -1,22 +1,31 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
 type TextContextType = {
-    text: string[]
+    text: string[],
+    currentLine: string,
+    nextLine: ()=>void
 }
 
 const TextContext = createContext<TextContextType|undefined>(undefined)
 
 const TextContextProvider = ({children}:{children: React.ReactNode}) => {
   const [textLines, setTextLines] = useState<string[]>([])
-  
+  const [lineIdx, setLineIdx] = useState<number>(0)
+
   useEffect(()=>{
     fetch("data.json")
     .then(response => response.json())
     .then(data => setTextLines(data.text))
   },[])
 
+  const nextLine = () => {
+    if(lineIdx<textLines.length-1){
+        setLineIdx(prev => prev + 1)
+    }
+  }
+
   return (
-    <TextContext.Provider value={{text:textLines}}>
+    <TextContext.Provider value={{text:textLines, currentLine: textLines[lineIdx], nextLine}}>
         {children}
     </TextContext.Provider>
   )

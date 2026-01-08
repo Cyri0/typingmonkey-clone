@@ -12,3 +12,22 @@
   align-items: center;
   flex-direction: column;
 }
+
+.untouched{
+  color: gray;
+}
+
+.good{
+  color: green;
+}
+
+.bad{
+  color: red;
+  text-decoration: underline;
+}
+
+#textInput{
+  width: 0px;
+  height: 0px;
+  border:none;
+}
