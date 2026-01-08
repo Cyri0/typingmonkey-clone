@@ -1,6 +1,12 @@
+import { useTextContext } from "./context/TextContextProvider"
+
 const App = () => {
+  const {text} = useTextContext()
+
   return (
-    <div>App</div>
+    <div>
+      {text.map(line=><p>{line}</p>)}
+    </div>
   )
 }
 
